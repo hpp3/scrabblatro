@@ -127,7 +127,7 @@ const WordGame: React.FC = () => {
     setSelectedCards(new Set());
     setMessage(`Played "${word}" for ${wordScore} points!`);
 
-    if (playsLeft === 1 && discardsLeft === 0) {
+    if (playsLeft === 1) {
       setIsGameOver(true);
     }
   };
@@ -151,10 +151,6 @@ const WordGame: React.FC = () => {
     setSelectedCards(new Set());
     setDiscardsLeft(discardsLeft - 1);
     setMessage(`Discarded ${selectedCards.size} cards.`);
-
-    if (playsLeft === 0 && discardsLeft === 1) {
-      setIsGameOver(true);
-    }
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -210,10 +206,9 @@ const WordGame: React.FC = () => {
                       className={`w-20 h-24 flex flex-col items-center justify-center cursor-pointer ${selectedCards.has(index) ? 'ring-2 ring-blue-500' : ''}`}
                       onClick={() => handleCardClick(index)}
                       >
-                      <CardContent className="p-2 flex flex-col items-center justify-between h-full select-none">
+                      <CardContent className="flex flex-col items-center justify-between h-full select-none">
                       <span className="text-sm">{letterScores[letter]} pts</span>
                       <span className="text-4xl font-bold">{letter}</span>
-                      <div className="h-2"></div>
                       </CardContent>
                       </Card>
                       </div>
@@ -226,8 +221,8 @@ const WordGame: React.FC = () => {
         </Droppable>
       </DragDropContext>
       <div className="space-x-2 mb-4">
-        <Button onClick={handlePlay} disabled={selectedCards.size === 0 || playsLeft === 0}>Play</Button>
-        <Button onClick={handleDiscard} disabled={selectedCards.size === 0 || discardsLeft === 0}>Discard</Button>
+        <Button onClick={handlePlay} disabled={selectedCards.size === 0 || playsLeft === 0} color="bg-blue-500 text-white hover:bg-blue-600">Play</Button>
+        <Button onClick={handleDiscard} disabled={selectedCards.size === 0 || discardsLeft === 0} color="bg-gray-200 text-black hover:bg-gray-300">Discard</Button>
       </div>
       <p>{message}</p>
       <AlertDialog open={isGameOver}>

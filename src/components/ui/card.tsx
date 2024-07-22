@@ -14,7 +14,7 @@ export const Card: React.FC<CardProps> = ({ className, children, ...props }) => 
 );
 
 export const CardContent: React.FC<CardProps> = ({ className, children, ...props }) => (
-  <div className={`p-6 ${className}`} {...props}>
+  <div className={`p-4 ${className}`} {...props}>
     {children}
   </div>
 );
